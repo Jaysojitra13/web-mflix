@@ -14,6 +14,7 @@ movieController.test = async (req, res) => {
   }
 };
 
+//To add a new movie
 movieController.newMovie = async (req, res) => {
   try {
     const {
@@ -62,6 +63,46 @@ movieController.newMovie = async (req, res) => {
       message: "Movie added successfully",
       data: result,
     });
+  } catch (err) {
+    return res.status(400).json({
+      message: err.message,
+    });
+  }
+};
+
+// To get a movie by id
+movieController.getMovieById = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const result = await movieHelper.getMovieById(id);
+
+    if (result) {
+      return res.status(200).json({ data: result });
+    } else {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+  } catch (err) {
+    return res.status(400).json({
+      message: err.message,
+    });
+  }
+};
+
+//To delete a movie by id
+movieController.deleteMovieById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await movieHelper.deleteMovieById(id);
+    if (result.deletedCount === 1) {
+      return res.status(200).json({
+        message: "Movie deleted successfully.",
+      });
+    } else {
+      return res.status(404).json({
+        message: "Movie not found",
+      });
+    }
   } catch (err) {
     return res.status(400).json({
       message: err.message,
