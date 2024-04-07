@@ -5,15 +5,16 @@ const { validationHandler } = require('../../../helper/validate');
 
 const movieRouter = express.Router();
 
-movieRouter.get("/test", movieController.test);
-
 //To add a new movie
-movieRouter.post("/Movies", movieMiddleware.addNewMovie(), validationHandler, movieController.newMovie);
+movieRouter.post("/", movieMiddleware.addNewMovie(), validationHandler, movieMiddleware.checkToken, movieController.newMovie);
 
 // To get a movie by id
-movieRouter.get("/Movies/:id", movieController.getMovieById);
+movieRouter.get("/:id", movieController.getMovieById);
 
 // To delete a movie by id
-movieRouter.delete("/Movies/:id", movieController.deleteMovieById);
+movieRouter.delete("/:id", movieMiddleware.checkToken, movieMiddleware.checkMovieExists, movieController.deleteMovieById);
+
+// To update a movie by id
+movieRouter.put("/:id", movieMiddleware.checkToken, movieMiddleware.checkMovieExists, movieController.updateMovieById);
 
 module.exports = movieRouter;

@@ -9,4 +9,6 @@ userRouter.get('/test', userController.test);
 
 userRouter.post('/sign-up', userMiddelware.signUpMiddleware(), validationHandler, userMiddelware.checkUniqueEmail, userController.signUp);
 
+userRouter.post('/login', userMiddelware.loginMiddleware(), validationHandler, userMiddelware.checkEmailExist, userController.login);
+
 module.exports = userRouter;

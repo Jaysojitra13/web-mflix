@@ -74,4 +74,12 @@ movieHelper.deleteMovieById = async (id) => {
   }
 };
 
+movieHelper.updateMovieById = async (id, updateObj) => {
+  try {
+    const result = await movieModel.findOneAndUpdate({ _id: id }, { $set: updateObj });
+    return result;
+  } catch (err) {
+    throw err;
+  }
+};
 module.exports = movieHelper;

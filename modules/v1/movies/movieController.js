@@ -110,4 +110,21 @@ movieController.deleteMovieById = async (req, res) => {
   }
 };
 
+
+//To update a movie by id
+movieController.updateMovieById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await movieHelper.updateMovieById(id, req.body);
+    return res.status(200).json({
+      message: "Movie updated successfully.",
+    });
+  } catch (err) {
+    return res.status(400).json({
+      message: err.message,
+    });
+  }
+};
+
+
 module.exports = movieController;

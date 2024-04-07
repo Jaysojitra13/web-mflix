@@ -30,4 +30,20 @@ userController.signUp = async (req, res) => {
     }
 };
 
+userController.login = async (req, res) => {
+    try {
+        const { password } = req.body;
+
+        const result = await userHelper.login(req.authUser, password);
+        return res.status(200).json({
+            message: "Logged in successfully",
+            data: result
+        });
+    } catch (err) {
+        return res.status(400).json({
+            message: err.message,
+        });
+    }
+};
+
 module.exports = userController;

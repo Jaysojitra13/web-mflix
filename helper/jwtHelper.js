@@ -7,7 +7,8 @@ jwtHelper.getAuthToken = (data) => { return jwt.sign(data, process.env.SECRET_KE
 jwtHelper.decodeAuthToken = (token) => {
   if (token) {
     try {
-      return jwt.verify(token, process.env.SECRET_KEY, { algorithms: 'HS512'});
+      const originalToken = token.split(' ')[1];
+      return jwt.verify(originalToken, process.env.SECRET_KEY, { algorithms: 'HS512'});
     } catch (error) {
       return false;
     }

@@ -29,4 +29,23 @@ userHelper.signUp = async (name, email, password) => {
     }
 };
 
+userHelper.login = async (authUser, password) => {
+    try {
+        const passwordMatched = await bcrypt.compare(password, authUser.password);
+        
+        if(!passwordMatched) {
+            throw new Error('Invalid password');
+        }
+
+        const response = {
+            _id: authUser._id,
+            email: authUser.email,
+            token: jwtHelper.getAuthToken({ _id: authUser.id })
+        }
+        return response;
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = userHelper;
