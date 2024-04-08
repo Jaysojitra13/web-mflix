@@ -1,6 +1,21 @@
+const movie = require("../../../models/movie");
 const movieModel = require("../../../models/movie");
 
 const movieHelper = {};
+
+movieHelper.getAllMovies = async (page, perPage) => {
+  try {
+    const movies = await movieModel
+      .find()
+      .sort({_id: -1})
+      .skip((page - 1) * perPage)
+      .limit(perPage);
+
+    return movies;
+  } catch (err) {
+    throw err;
+  }
+};
 
 // To add a new movie
 movieHelper.newMovie = async (
@@ -76,7 +91,10 @@ movieHelper.deleteMovieById = async (id) => {
 
 movieHelper.updateMovieById = async (id, updateObj) => {
   try {
-    const result = await movieModel.findOneAndUpdate({ _id: id }, { $set: updateObj });
+    const result = await movieModel.findOneAndUpdate(
+      { _id: id },
+      { $set: updateObj }
+    );
     return result;
   } catch (err) {
     throw err;

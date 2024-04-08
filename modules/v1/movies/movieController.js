@@ -14,6 +14,21 @@ movieController.test = async (req, res) => {
   }
 };
 
+movieController.getAllMovies = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const perPage = parseInt(req.query.perPage) || 10;
+
+    const movies = await movieHelper.getAllMovies(page, perPage);
+
+    return res.status(200).json(movies);
+  } catch (err) {
+    return res.status(400).json({
+      message: err.message,
+    });
+  }
+};
+
 //To add a new movie
 movieController.newMovie = async (req, res) => {
   try {
@@ -110,7 +125,6 @@ movieController.deleteMovieById = async (req, res) => {
   }
 };
 
-
 //To update a movie by id
 movieController.updateMovieById = async (req, res) => {
   try {
@@ -125,6 +139,5 @@ movieController.updateMovieById = async (req, res) => {
     });
   }
 };
-
 
 module.exports = movieController;
