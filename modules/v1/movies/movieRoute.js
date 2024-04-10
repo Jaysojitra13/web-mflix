@@ -5,7 +5,7 @@ const { validationHandler } = require("../../../helper/validate");
 
 const movieRouter = express.Router();
 
-movieRouter.get("/", movieController.getAllMovies);
+movieRouter.get("/",movieMiddleware.checkPagination(),validationHandler, movieController.getAllMovies);
 
 //To add a new movie
 movieRouter.post(

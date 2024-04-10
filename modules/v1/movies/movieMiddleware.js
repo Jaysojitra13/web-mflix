@@ -1,4 +1,4 @@
-const { check } = require("express-validator");
+const { check, query } = require("express-validator");
 const jwt = require('../../../helper/jwtHelper');
 const userModel = require('../../../models/user');
 const movieModel = require('../../../models/movie');
@@ -11,6 +11,8 @@ movieMiddleware.addNewMovie = () => {
     check("languages", "languages is required field").isArray().notEmpty(),
   ];
 };
+
+
 
 movieMiddleware.checkToken = async (req, res, next) => {
   try {
@@ -57,6 +59,14 @@ movieMiddleware.checkMovieExists = async (req, res, next) => {
       message: err.message,
     });
   }
+};
+
+
+movieMiddleware.checkPagination = () => {
+  return [
+    query("page", "Page should be number").isNumeric(),
+    query("perPage", "perPage should be number").isNumeric()
+  ];
 };
 
 module.exports = movieMiddleware;
