@@ -5,7 +5,7 @@ const userMiddelware = {};
 
 userMiddelware.signUpMiddleware = () => {
   return [
-    check('email', 'email is required Field').trim().not().isEmpty(),
+    check('email', 'email is required Field').trim().not().isEmail(),
     check('name', 'name is required Field').trim().not().isEmpty(),
     check('password', 'password is required field').trim().not().isEmpty()
   ];
