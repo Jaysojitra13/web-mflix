@@ -7,7 +7,7 @@ movieHelper.getAllMovies = async (page, perPage) => {
   try {
     const movies = await movieModel
       .find()
-      .sort({_id: -1})
+      .sort({_id: 1})
       .skip((page - 1) * perPage)
       .limit(perPage);
 

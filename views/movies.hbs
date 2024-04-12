@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title> Final Exam </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <style>
+      .center {
+          margin: auto;
+          width: 50%;
+          padding: 10px;
+      }
+      .header {
+        margin-left: 25%;
+      }
+      .form-section{
+        margin-left: 25%;
+      }
+    </style>
+  <body>
+    <div class="container">
+         <a href="/"> <button class="btn btn-primary">See more </button></a>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+            <th>Poster</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Languages</th>
+            <th>Directors</th>
+            <th>Cast</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+                <tr>
+                    <td>
+                        <img src="{{poster}}" height="50" width="50" alt="No image">
+                    </td>
+                    <td>{{title}}</td>
+                    <td>{{showGenre genres}}</td>
+                    <td>{{showGenre languages}}</td>
+                    <td>{{showGenre directors}}</td>
+                    <td>{{showGenre cast}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+        </table>
+    </div>
+  </body>
+</html>

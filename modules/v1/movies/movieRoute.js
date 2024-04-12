@@ -12,6 +12,12 @@ movieRouter.get(
   movieController.getAllMovies
 );
 
+movieRouter.post(
+  "/web",
+  movieController.getAllMoviesForWeb
+);
+
+
 //To add a new movie
 movieRouter.post(
   "/",

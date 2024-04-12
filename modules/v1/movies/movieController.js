@@ -29,6 +29,21 @@ movieController.getAllMovies = async (req, res) => {
   }
 };
 
+movieController.getAllMoviesForWeb = async (req, res) => {
+  try {
+    const page = parseInt(req.body.page) || 1;
+    const perPage = parseInt(req.body.perPage) || 10;
+
+    let movies = await movieHelper.getAllMovies(page, perPage);
+    movies = JSON.parse(JSON.stringify(movies));
+    return res.render("movies", { data: movies, layout: false });
+    
+  } catch (err) {
+    return res.status(400).json({
+      message: err.message,
+    });
+  }
+};
 //To add a new movie
 movieController.newMovie = async (req, res) => {
   try {
