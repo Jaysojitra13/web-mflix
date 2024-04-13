@@ -33,8 +33,9 @@ movieController.getAllMoviesForWeb = async (req, res) => {
   try {
     const page = parseInt(req.body.page) || 1;
     const perPage = parseInt(req.body.perPage) || 10;
+    const search = req.body.search || '';
 
-    let movies = await movieHelper.getAllMovies(page, perPage);
+    let movies = await movieHelper.getAllMovies(page, perPage, search);
     movies = JSON.parse(JSON.stringify(movies));
     return res.render("movies", { data: movies, layout: false });
     

@@ -33,7 +33,7 @@ mongoose.connect(database.url);
 
 app.use("/api/v1", require("./routes/v1"));
 
-app.get("/show", function (req, res) {
+app.get("/", function (req, res) {
   res.render("form");
 });
 

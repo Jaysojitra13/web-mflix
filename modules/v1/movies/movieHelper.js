@@ -3,10 +3,15 @@ const movieModel = require("../../../models/movie");
 
 const movieHelper = {};
 
-movieHelper.getAllMovies = async (page, perPage) => {
+movieHelper.getAllMovies = async (page, perPage, search) => {
   try {
+    const where = {};
+    if (search) {
+      where['title'] = { $regex: new RegExp(search, 'i') }
+    }
+    
     const movies = await movieModel
-      .find()
+      .find(where)
       .sort({_id: 1})
       .skip((page - 1) * perPage)
       .limit(perPage);
