@@ -2,11 +2,18 @@ const express = require("express");
 const movieController = require("./movieController");
 const movieMiddleware = require("./movieMiddleware");
 const { validationHandler } = require("../../../helper/validate");
+const rateLimit = require('express-rate-limit');
 
 const movieRouter = express.Router();
 
+const limiter = rateLimit({
+	windowMs: 1 * 60 * 1000,
+	limit: 2
+})
+
 movieRouter.get(
   "/",
+  limiter,
   movieMiddleware.checkPagination(),
   validationHandler,
   movieController.getAllMovies
