@@ -18,7 +18,7 @@ movieMiddleware.checkToken = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
 
-    if (authorization) {
+    if (authorization && !blackList.has(authorization)) {
       const decode = jwt.decodeAuthToken(authorization);
 
       if (decode) {

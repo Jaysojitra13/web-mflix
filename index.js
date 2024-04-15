@@ -29,6 +29,8 @@ app.set("view engine", "hbs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+global.blackList = new Set();
+
 mongoose.connect(database.url);
 
 app.use("/api/v1", require("./routes/v1"));

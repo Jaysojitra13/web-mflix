@@ -46,4 +46,17 @@ userController.login = async (req, res) => {
     }
 };
 
+userController.logout = async (req, res) => {
+    try {
+        blackList.add(req.headers.authorization);
+        return res.status(200).json({
+            message: "Logged out successfull.",
+        });
+    } catch (err) {
+        return res.status(400).json({
+            message: err.message,
+        });
+    }
+};
+
 module.exports = userController;
